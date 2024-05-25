@@ -124,11 +124,9 @@ class GoogleScreen extends StatelessWidget {
             IconButton(
                 onPressed: () {
                   inAppWebViewController.loadUrl(
-                urlRequest  : URLRequest(
+                      urlRequest: URLRequest(
                     url: WebUri('https://www.google.com/'),
-                  )
-                  );
-
+                  ));
                 },
                 icon: Icon(Icons.home)),
             IconButton(
