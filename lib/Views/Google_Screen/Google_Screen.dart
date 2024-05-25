@@ -78,6 +78,7 @@ class GoogleScreen extends StatelessWidget {
                       Provider.of<MainProvider>(context, listen: false)
                           .onchange_progress(progress);
                     },
+                    pullToRefreshController: pullToRefreshController,
                   ),
                   (Provider.of<MainProvider>(context, listen: true).progress <
                           1)
@@ -91,6 +92,7 @@ class GoogleScreen extends StatelessWidget {
                           ),
                         )
                       : Container(),
+
                 ],
               );
             } else {
