@@ -6,6 +6,14 @@ import 'package:provider/provider.dart';
 import '../../Providers/All_Providers.dart';
 import '../../Utils/Global_Variables.dart';
 
+
+PullToRefreshController pullToRefreshController = PullToRefreshController(
+  onRefresh: () {
+    inAppWebViewController.reload();
+  },
+);
+
+
 class GoogleScreen extends StatelessWidget {
   const GoogleScreen({super.key});
 
