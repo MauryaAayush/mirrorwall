@@ -6,7 +6,7 @@ class MainProvider extends ChangeNotifier
   String searchtext = 'Google';
 
   List <String> bookmarkList= [];
-  String? CurrentUrl;
+  String? currentUrl;
 
   void onchange_progress(int progress)
   {
@@ -19,4 +19,12 @@ class MainProvider extends ChangeNotifier
     this.searchtext = searchtext;
     notifyListeners();
   }
+
+  void setcurrentUrl(String Url)
+  {
+    currentUrl = Url;
+    notifyListeners();
+  }
+
+
 }
