@@ -2,9 +2,11 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:provider/provider.dart';
+import 'package:untitled/Views/FeedbackScreen.dart';
 
 import '../../Providers/All_Providers.dart';
 import '../../Utils/Global_Variables.dart';
+import '../History Page.dart';
 
 PullToRefreshController pullToRefreshController = PullToRefreshController(
   onRefresh: () {
@@ -49,24 +51,38 @@ class GoogleScreen extends StatelessWidget {
               },
             ),
           ),
-
           PopupMenuButton(
-
+            onSelected: (value) {
+              if (value == 'Feedback') {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Consumer<MainProvider>(
+                      builder: (context, mainProvider, child) {
+                        return ListView.builder(
+                          itemCount: mainProvider.bookmarkList.length,
+                          itemBuilder: (context, index) {
+                            return ListTile(
+                              title: Text(mainProvider.bookmarkList[index]),
+                            );
+                          },
+                        );
+                      },
+                    );
+                  },
+                );
+              } else if (value == 'History') {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const HistoryScreen(),
+                ));
+              }
+            },
             itemBuilder: (context) => <PopupMenuEntry>[
-            PopupMenuItem(
-                value: 'Feedback',
-                child: Text('Feedback')),
-              PopupMenuItem(
-                  value: 'History',
-                  child: Text('History')),
-
-              PopupMenuItem(
-                  value: 'Engine',
-                  child: Text('Search Engine')),
-          ],),
-
-
-
+              PopupMenuItem(value: 'Feedback', child: Text('Feedback')),
+              PopupMenuItem(value: 'History', child: Text('History')),
+              PopupMenuItem(value: 'Engine', child: Text('Search Engine')),
+            ],
+          ),
         ],
         // bottom:
       ),
@@ -89,13 +105,28 @@ class GoogleScreen extends StatelessWidget {
                           .onchange_progress(progress);
                     },
 
+                    // for the History add and show
                     onLoadStart: (controller, url) {
-                      Provider.of<MainProvider>(context,listen: false).setcurrentUrl(url.toString());
+                      Provider.of<MainProvider>(context, listen: false)
+                          .setcurrentUrl(url.toString());
 
-                      Provider.of<MainProvider>(context,listen: false).addtoHistory();
+                      Provider.of<MainProvider>(context, listen: false)
+                          .addtoHistory();
+
+
                     },
 
+                    // for the add to fav site
                     onLoadStop: (controller, url) {
+
+
+                      Provider.of<MainProvider>(context, listen: false)
+                          .setcurrentUrl(url.toString());
+
+                      Provider.of<MainProvider>(context, listen: false)
+                          .addtoHistory();
+
+
                       Provider.of<MainProvider>(context, listen: false)
                           .setcurrentUrl(url.toString());
                       pullToRefreshController.endRefreshing();
@@ -147,8 +178,10 @@ class GoogleScreen extends StatelessWidget {
                 icon: const Icon(Icons.home)),
             IconButton(
                 onPressed: () {
-                  Provider.of<MainProvider>(context,listen: false).addtoBookMark();
-                }, icon: const Icon(Icons.bookmark_add_outlined)),
+                  Provider.of<MainProvider>(context, listen: false)
+                      .addtoBookMark();
+                },
+                icon: const Icon(Icons.bookmark_add_outlined)),
             IconButton(
               onPressed: () {
                 inAppWebViewController.goBack();

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 class MainProvider extends ChangeNotifier
@@ -7,7 +9,7 @@ class MainProvider extends ChangeNotifier
 
   List <String> bookmarkList= [];
   String? currentUrl;
-  List <String> history = [];
+  List <String> historylist = [];
   String? searchvalue;
 
   void onchange_progress(int progress)
@@ -24,25 +26,31 @@ class MainProvider extends ChangeNotifier
 
   void setcurrentUrl(String Url)
   {
+    log('link url----------------------------------------------');
     currentUrl = Url;
     notifyListeners();
   }
 
   void addtoBookMark()
   {
+    log('link asd----------------------------------------------');
     bookmarkList.add(currentUrl!);
     notifyListeners();
   }
 
   void seturlforhistory(String url)
   {
+    log('link assigned----------------------------------------------');
+
     searchvalue = url;
+
     notifyListeners();
   }
 
   void addtoHistory()
   {
-    history.add(searchvalue!);
+    historylist.add(searchvalue!);
+    log('link added------------------------------------------------');
     notifyListeners();
   }
 }
