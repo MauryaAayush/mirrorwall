@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:untitled/Utils/Global_Variables.dart';
 
 class MainProvider extends ChangeNotifier
 {
@@ -24,11 +26,15 @@ class MainProvider extends ChangeNotifier
     notifyListeners();
   }
 
-  void setcurrentUrl(String Url)
-  {
-    log('link url----------------------------------------------');
-    currentUrl = Url;
+  Future<void> setcurrentUrl()
+  async {
+
+    WebUri? webUri = await inAppWebViewController.getUrl();
+    currentUrl = await inAppWebViewController.getTitle() as String;
     notifyListeners();
+
+
+
   }
 
   void addtoBookMark()
@@ -38,18 +44,10 @@ class MainProvider extends ChangeNotifier
     notifyListeners();
   }
 
-  void seturlforhistory(String url)
-  {
-    log('link assigned----------------------------------------------');
-
-    searchvalue = url;
-
-    notifyListeners();
-  }
 
   void addtoHistory()
   {
-    historylist.add(searchvalue!);
+    historylist.add(currentUrl!);
     log('link added------------------------------------------------');
     notifyListeners();
   }

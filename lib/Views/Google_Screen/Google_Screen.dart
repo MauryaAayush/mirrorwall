@@ -107,8 +107,8 @@ class GoogleScreen extends StatelessWidget {
 
                     // for the History add and show
                     onLoadStart: (controller, url) {
-                      Provider.of<MainProvider>(context, listen: false)
-                          .setcurrentUrl(url.toString());
+                      // Provider.of<MainProvider>(context, listen: false)
+                      //     .setcurrentUrl(url.toString());
 
                       Provider.of<MainProvider>(context, listen: false)
                           .addtoHistory();
@@ -120,15 +120,15 @@ class GoogleScreen extends StatelessWidget {
                     onLoadStop: (controller, url) {
 
 
-                      Provider.of<MainProvider>(context, listen: false)
-                          .setcurrentUrl(url.toString());
+                      // Provider.of<MainProvider>(context, listen: false)
+                      //     .setcurrentUrl(url.toString());
+                      //
+                      // Provider.of<MainProvider>(context, listen: false)
+                      //     .addtoHistory();
+
 
                       Provider.of<MainProvider>(context, listen: false)
-                          .addtoHistory();
-
-
-                      Provider.of<MainProvider>(context, listen: false)
-                          .setcurrentUrl(url.toString());
+                          .setcurrentUrl();
                       pullToRefreshController.endRefreshing();
                     },
                     pullToRefreshController: pullToRefreshController,
