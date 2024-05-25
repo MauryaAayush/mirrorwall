@@ -5,6 +5,9 @@ class MainProvider extends ChangeNotifier
   double progress = 0;
   String searchtext = 'Google';
 
+  List <String> bookmarkList= [];
+  String? CurrentUrl;
+
   void onchange_progress(int progress)
   {
     this.progress = progress/100;
