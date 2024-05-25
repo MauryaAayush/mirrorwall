@@ -130,7 +130,9 @@ class GoogleScreen extends StatelessWidget {
                 },
                 icon: Icon(Icons.home)),
             IconButton(
-                onPressed: () {}, icon: Icon(Icons.bookmark_add_outlined)),
+                onPressed: () {
+                  Provider.of<MainProvider>(context,listen: false).addtoBookMark();
+                }, icon: Icon(Icons.bookmark_add_outlined)),
             IconButton(
               onPressed: () {
                 inAppWebViewController.goBack();
