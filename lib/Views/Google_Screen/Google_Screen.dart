@@ -47,10 +47,6 @@ class GoogleScreen extends StatelessWidget {
 
               Provider.of<MainProvider>(context,listen: false).searchEngines();
 
-                // inAppWebViewController.loadUrl(
-                //     urlRequest: URLRequest(
-                //         url: WebUri(
-                //             'https://www.google.com/search?q= ${Provider.of<MainProvider>(context, listen: false).searchtext}  &sca_esv=2358ec6357e7f4b8&sca_upv=1&sxsrf=ADLYWIIskdPoVtrMe3x9OTJOiDDBhSiqKA%3A1716531975549&ei=BzNQZsqGIcfd2roPxumH2AE&oq=flutter+a&gs_lp=Egxnd3Mtd2l6LXNlcnAiCWZsdXR0ZXIgYSoCCAEyCxAAGIAEGJECGIoFMg4QABiABBiRAhixAxiKBTILEAAYgAQYsQMYgwEyDRAAGIAEGLEDGBQYhwIyCxAAGIAEGJECGIoFMgsQABiABBixAxiDATIOEAAYgAQYkQIYsQMYigUyCxAAGIAEGJECGIoFMgUQABiABDIFEAAYgARIni9QqAlY1hxwAXgBkAEAmAHMAaAB3QKqAQUwLjEuMbgBA8gBAPgBAZgCA6AC6gLCAgcQIxiwAxgnwgIKEAAYsAMY1gQYR8ICBBAjGCfCAgoQIxiABBgnGIoFwgIIEAAYgAQYsQOYAwCIBgGQBgqSBwUxLjEuMaAHyw4&sclient=gws-wiz-serp')));
               },
             ),
           ),
