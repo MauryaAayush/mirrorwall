@@ -81,6 +81,7 @@ class GoogleScreen extends StatelessWidget {
 
                     onLoadStop: (controller, url) {
                       Provider.of<MainProvider>(context).setcurrentUrl(url.toString());
+                      pullToRefreshController.endRefreshing();
                     },
 
 
