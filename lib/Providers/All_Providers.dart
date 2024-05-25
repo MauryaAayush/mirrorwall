@@ -47,14 +47,12 @@ class MainProvider extends ChangeNotifier {
   }
 
   void addtoBookMark() {
-    log('link asd----------------------------------------------');
     bookmarkList.add(currentUrl!);
     notifyListeners();
   }
 
   void addtoHistory() {
     historylist.add(currentUrl!);
-    log('link added------------------------------------------------');
     notifyListeners();
   }
 
