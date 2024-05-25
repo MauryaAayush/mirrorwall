@@ -49,15 +49,24 @@ class GoogleScreen extends StatelessWidget {
               },
             ),
           ),
-          IconButton(
-              padding: EdgeInsets.zero,
-              onPressed: () {
-                MenuBar(children: [
-                  Text('All Fedback'),
-                  Text('Search Engins'),
-                ]);
-              },
-              icon: Icon(Icons.more_vert)),
+
+          PopupMenuButton(
+
+            itemBuilder: (context) => <PopupMenuEntry>[
+            PopupMenuItem(
+                value: 'Feedback',
+                child: Text('Feedback')),
+              PopupMenuItem(
+                  value: 'History',
+                  child: Text('History')),
+
+              PopupMenuItem(
+                  value: 'Engine',
+                  child: Text('Search Engine')),
+          ],),
+
+
+
         ],
         // bottom:
       ),
