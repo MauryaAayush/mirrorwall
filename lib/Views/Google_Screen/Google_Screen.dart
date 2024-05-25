@@ -11,42 +11,44 @@ class GoogleScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         actions: [
-          // TextFormField(
-          //   controller: txtsearch,
-          //   decoration: InputDecoration(
-          //       prefixIcon: Icon(Icons.error_outline),
-          //       suffixIcon: IconButton(
-          //           onPressed: () {
-          //             Provider.of<MainProvider>(context, listen: false)
-          //                 .search(txtsearch.text);
-          //
-          //             inAppWebViewController.loadUrl(
-          //                 urlRequest: URLRequest(
-          //                     url: WebUri(
-          //                         'https://www.google.com/search?q=   ${Provider.of<MainProvider>(context, listen: false).searchtext}  &sca_esv=2358ec6357e7f4b8&sca_upv=1&sxsrf=ADLYWIIskdPoVtrMe3x9OTJOiDDBhSiqKA%3A1716531975549&ei=BzNQZsqGIcfd2roPxumH2AE&oq=flutter+a&gs_lp=Egxnd3Mtd2l6LXNlcnAiCWZsdXR0ZXIgYSoCCAEyCxAAGIAEGJECGIoFMg4QABiABBiRAhixAxiKBTILEAAYgAQYsQMYgwEyDRAAGIAEGLEDGBQYhwIyCxAAGIAEGJECGIoFMgsQABiABBixAxiDATIOEAAYgAQYkQIYsQMYigUyCxAAGIAEGJECGIoFMgUQABiABDIFEAAYgARIni9QqAlY1hxwAXgBkAEAmAHMAaAB3QKqAQUwLjEuMbgBA8gBAPgBAZgCA6AC6gLCAgcQIxiwAxgnwgIKEAAYsAMY1gQYR8ICBBAjGCfCAgoQIxiABBgnGIoFwgIIEAAYgAQYsQOYAwCIBgGQBgqSBwUxLjEuMaAHyw4&sclient=gws-wiz-serp')));
-          //           },
-          //           icon: Icon(Icons.find_replace_outlined)),
-          //       hintText: 'Search or type URL',
-          //       fillColor: Colors.white,
-          //       filled: true,
-          //       border: OutlineInputBorder(
-          //           borderRadius: BorderRadius.circular(20)),
-          //       contentPadding: EdgeInsets.symmetric(vertical: 10)),
-          // ),
+          SizedBox(
+            height: 40,
+            width: 350,
+            child: TextFormField(
+              controller: txtsearch,
+              decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.error_outline),
+                  suffixIcon: IconButton(
+                      onPressed: () {
+                        Provider.of<MainProvider>(context, listen: false)
+                            .search(txtsearch.text);
+
+                        inAppWebViewController.loadUrl(
+                            urlRequest: URLRequest(
+                                url: WebUri(
+                                    'https://www.google.com/search?q=   ${Provider.of<MainProvider>(context, listen: false).searchtext}  &sca_esv=2358ec6357e7f4b8&sca_upv=1&sxsrf=ADLYWIIskdPoVtrMe3x9OTJOiDDBhSiqKA%3A1716531975549&ei=BzNQZsqGIcfd2roPxumH2AE&oq=flutter+a&gs_lp=Egxnd3Mtd2l6LXNlcnAiCWZsdXR0ZXIgYSoCCAEyCxAAGIAEGJECGIoFMg4QABiABBiRAhixAxiKBTILEAAYgAQYsQMYgwEyDRAAGIAEGLEDGBQYhwIyCxAAGIAEGJECGIoFMgsQABiABBixAxiDATIOEAAYgAQYkQIYsQMYigUyCxAAGIAEGJECGIoFMgUQABiABDIFEAAYgARIni9QqAlY1hxwAXgBkAEAmAHMAaAB3QKqAQUwLjEuMbgBA8gBAPgBAZgCA6AC6gLCAgcQIxiwAxgnwgIKEAAYsAMY1gQYR8ICBBAjGCfCAgoQIxiABBgnGIoFwgIIEAAYgAQYsQOYAwCIBgGQBgqSBwUxLjEuMaAHyw4&sclient=gws-wiz-serp')));
+                      },
+                      icon: Icon(Icons.find_replace_outlined)),
+                  hintText: 'Search or type URL',
+                  fillColor: Colors.white,
+                  filled: true,
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  contentPadding: EdgeInsets.symmetric(vertical: 10)),
+            ),
+          ),
           IconButton(
               padding: EdgeInsets.zero,
-              onPressed:
-              () {
+              onPressed: () {
                 MenuBar(children: [
                   Text('All Fedback'),
                   Text('Search Engins'),
-
                 ]);
-              }, icon: Icon(Icons.more_vert))
+              },
+              icon: Icon(Icons.more_vert)),
         ],
         // bottom:
       ),
@@ -70,16 +72,16 @@ class GoogleScreen extends StatelessWidget {
                     },
                   ),
                   (Provider.of<MainProvider>(context, listen: true).progress <
-                      1)
+                          1)
                       ? Align(
-                    alignment: Alignment.topCenter,
-                    child: LinearProgressIndicator(
-                      color: Colors.blueAccent,
-                      value:
-                      Provider.of<MainProvider>(context, listen: true)
-                          .progress,
-                    ),
-                  )
+                          alignment: Alignment.topCenter,
+                          child: LinearProgressIndicator(
+                            color: Colors.blueAccent,
+                            value:
+                                Provider.of<MainProvider>(context, listen: true)
+                                    .progress,
+                          ),
+                        )
                       : Container(),
                 ],
               );
