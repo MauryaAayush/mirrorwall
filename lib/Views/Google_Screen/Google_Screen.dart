@@ -26,7 +26,7 @@ class GoogleScreen extends StatelessWidget {
             child: TextFormField(
               controller: txtsearch,
               decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.error_outline),
+                  prefixIcon: Icon(Icons.link_sharp),
                   suffixIcon: IconButton(
                       onPressed: () {
                         txtsearch.clear();
