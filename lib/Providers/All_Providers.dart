@@ -26,5 +26,9 @@ class MainProvider extends ChangeNotifier
     notifyListeners();
   }
 
-
+  void addtoBookMark()
+  {
+    bookmarkList.add(currentUrl!);
+    notifyListeners();
+  }
 }
