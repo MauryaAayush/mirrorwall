@@ -144,7 +144,7 @@ class GoogleScreen extends StatelessWidget {
               onPressed: () {
                 inAppWebViewController.reload();
               },
-              icon: Icon(Icons.refresh),
+              icon: const Icon(Icons.refresh),
               iconSize: 30,
             ),
             IconButton(
