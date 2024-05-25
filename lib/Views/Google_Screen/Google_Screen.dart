@@ -78,6 +78,12 @@ class GoogleScreen extends StatelessWidget {
                       Provider.of<MainProvider>(context, listen: false)
                           .onchange_progress(progress);
                     },
+
+                    onLoadStop: (controller, url) {
+                      Provider.of<MainProvider>(context).setcurrentUrl(url.toString());
+                    },
+
+
                     pullToRefreshController: pullToRefreshController,
                   ),
                   (Provider.of<MainProvider>(context, listen: true).progress <
