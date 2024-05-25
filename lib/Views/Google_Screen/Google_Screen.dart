@@ -128,16 +128,16 @@ class GoogleScreen extends StatelessWidget {
                     url: WebUri('https://www.google.com/'),
                   ));
                 },
-                icon: Icon(Icons.home)),
+                icon: const Icon(Icons.home)),
             IconButton(
                 onPressed: () {
                   Provider.of<MainProvider>(context,listen: false).addtoBookMark();
-                }, icon: Icon(Icons.bookmark_add_outlined)),
+                }, icon: const Icon(Icons.bookmark_add_outlined)),
             IconButton(
               onPressed: () {
                 inAppWebViewController.goBack();
               },
-              icon: Icon(Icons.chevron_left),
+              icon: const Icon(Icons.chevron_left),
               iconSize: 32,
             ),
             IconButton(
