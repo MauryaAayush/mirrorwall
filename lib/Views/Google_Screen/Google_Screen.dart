@@ -41,13 +41,16 @@ class GoogleScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20)),
                   contentPadding: EdgeInsets.symmetric(vertical: 10)),
               onFieldSubmitted: (value) {
-                Provider.of<MainProvider>(context, listen: false)
-                    .search(txtsearch.text);
 
-                inAppWebViewController.loadUrl(
-                    urlRequest: URLRequest(
-                        url: WebUri(
-                            'https://www.google.com/search?q= ${Provider.of<MainProvider>(context, listen: false).searchtext}  &sca_esv=2358ec6357e7f4b8&sca_upv=1&sxsrf=ADLYWIIskdPoVtrMe3x9OTJOiDDBhSiqKA%3A1716531975549&ei=BzNQZsqGIcfd2roPxumH2AE&oq=flutter+a&gs_lp=Egxnd3Mtd2l6LXNlcnAiCWZsdXR0ZXIgYSoCCAEyCxAAGIAEGJECGIoFMg4QABiABBiRAhixAxiKBTILEAAYgAQYsQMYgwEyDRAAGIAEGLEDGBQYhwIyCxAAGIAEGJECGIoFMgsQABiABBixAxiDATIOEAAYgAQYkQIYsQMYigUyCxAAGIAEGJECGIoFMgUQABiABDIFEAAYgARIni9QqAlY1hxwAXgBkAEAmAHMAaAB3QKqAQUwLjEuMbgBA8gBAPgBAZgCA6AC6gLCAgcQIxiwAxgnwgIKEAAYsAMY1gQYR8ICBBAjGCfCAgoQIxiABBgnGIoFwgIIEAAYgAQYsQOYAwCIBgGQBgqSBwUxLjEuMaAHyw4&sclient=gws-wiz-serp')));
+                Provider.of<MainProvider>(context, listen: false)
+                    .updateSearchedText(value);
+
+              Provider.of<MainProvider>(context,listen: false).searchEngines();
+
+                // inAppWebViewController.loadUrl(
+                //     urlRequest: URLRequest(
+                //         url: WebUri(
+                //             'https://www.google.com/search?q= ${Provider.of<MainProvider>(context, listen: false).searchtext}  &sca_esv=2358ec6357e7f4b8&sca_upv=1&sxsrf=ADLYWIIskdPoVtrMe3x9OTJOiDDBhSiqKA%3A1716531975549&ei=BzNQZsqGIcfd2roPxumH2AE&oq=flutter+a&gs_lp=Egxnd3Mtd2l6LXNlcnAiCWZsdXR0ZXIgYSoCCAEyCxAAGIAEGJECGIoFMg4QABiABBiRAhixAxiKBTILEAAYgAQYsQMYgwEyDRAAGIAEGLEDGBQYhwIyCxAAGIAEGJECGIoFMgsQABiABBixAxiDATIOEAAYgAQYkQIYsQMYigUyCxAAGIAEGJECGIoFMgUQABiABDIFEAAYgARIni9QqAlY1hxwAXgBkAEAmAHMAaAB3QKqAQUwLjEuMbgBA8gBAPgBAZgCA6AC6gLCAgcQIxiwAxgnwgIKEAAYsAMY1gQYR8ICBBAjGCfCAgoQIxiABBgnGIoFwgIIEAAYgAQYsQOYAwCIBgGQBgqSBwUxLjEuMaAHyw4&sclient=gws-wiz-serp')));
               },
             ),
           ),
@@ -76,6 +79,43 @@ class GoogleScreen extends StatelessWidget {
                   builder: (context) => const HistoryScreen(),
                 ));
               }
+              else if (value == 'Engine') {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text("Search Engines"),
+                      content: Container(
+                        height: 240,
+                        width: 400,
+                        child: Column(
+                          children: [
+                            Expanded(
+                              child: ListView.builder(
+                                itemCount: 4,
+                                shrinkWrap: true,
+                                itemBuilder: (context, index) => RadioListTile(
+                                  title: Text(Provider.of<MainProvider>(context, listen: true).searchEngineNames[index]),
+                                  value: Provider.of<MainProvider>(context, listen: true).searchEngineNames[index],
+                                  groupValue: Provider.of<MainProvider>(context, listen: true).groupValue,
+                                  onChanged: (value) {
+                                    Provider.of<MainProvider>(context, listen: false).updateSearchEngineGroupValue(value!);
+                                    Navigator.pop(context);
+                                    Provider.of<MainProvider>(context, listen: false).updateSearchEngine(value!);
+
+                                    print(value);
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              }
+
             },
             itemBuilder: (context) => <PopupMenuEntry>[
               PopupMenuItem(value: 'Feedback', child: Text('Feedback')),
@@ -112,20 +152,15 @@ class GoogleScreen extends StatelessWidget {
 
                       Provider.of<MainProvider>(context, listen: false)
                           .addtoHistory();
-
-
                     },
 
                     // for the add to fav site
                     onLoadStop: (controller, url) {
-
-
                       // Provider.of<MainProvider>(context, listen: false)
                       //     .setcurrentUrl(url.toString());
                       //
                       // Provider.of<MainProvider>(context, listen: false)
                       //     .addtoHistory();
-
 
                       Provider.of<MainProvider>(context, listen: false)
                           .setcurrentUrl();
@@ -182,10 +217,22 @@ class GoogleScreen extends StatelessWidget {
                       .addtoBookMark();
                 },
                 icon: const Icon(Icons.bookmark_add_outlined)),
+
+            // here is logic of back button
+
             IconButton(
-              onPressed: () {
-                inAppWebViewController.goBack();
-              },
+              disabledColor: Colors.grey,
+              onPressed: Provider.of<MainProvider>(context, listen: false)
+                      .isButtonEnabled
+                  ? () {
+                      if (Provider.of<MainProvider>(context, listen: false)
+                          .isButtonEnabled) {
+                        inAppWebViewController.goBack();
+                      } else {
+                        return;
+                      }
+                    }
+                  : null,
               icon: const Icon(Icons.chevron_left),
               iconSize: 32,
             ),
@@ -197,6 +244,7 @@ class GoogleScreen extends StatelessWidget {
               iconSize: 30,
             ),
             IconButton(
+              disabledColor: Colors.grey,
               onPressed: () {
                 inAppWebViewController.goForward();
               },
