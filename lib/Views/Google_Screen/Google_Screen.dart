@@ -121,6 +121,8 @@ class GoogleScreen extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+
+
             IconButton(
               onPressed: () {
                 inAppWebViewController.goBack();
@@ -128,13 +130,7 @@ class GoogleScreen extends StatelessWidget {
               icon: Icon(Icons.chevron_left),
               iconSize: 35,
             ),
-            IconButton(
-              onPressed: () {
-                inAppWebViewController.goForward();
-              },
-              icon: Icon(Icons.chevron_right),
-              iconSize: 35,
-            ),
+
             IconButton(
               onPressed: () {
                 inAppWebViewController.reload();
@@ -142,18 +138,17 @@ class GoogleScreen extends StatelessWidget {
               icon: Icon(Icons.refresh),
               iconSize: 30,
             ),
+
+
             IconButton(
               onPressed: () {
-                // inAppWebViewController.reload();
+                inAppWebViewController.goForward();
               },
-              icon: Icon(Icons.looks_one_outlined),
-              iconSize: 30,
+              icon: Icon(Icons.chevron_right),
+              iconSize: 35,
             ),
-            IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.menu),
-              iconSize: 30,
-            ),
+
+
           ],
         ),
       ),
