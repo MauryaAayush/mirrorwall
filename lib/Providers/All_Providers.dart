@@ -7,6 +7,8 @@ class MainProvider extends ChangeNotifier
 
   List <String> bookmarkList= [];
   String? currentUrl;
+  List <String> history = [];
+  String? searchvalue;
 
   void onchange_progress(int progress)
   {
@@ -29,6 +31,12 @@ class MainProvider extends ChangeNotifier
   void addtoBookMark()
   {
     bookmarkList.add(currentUrl!);
+    notifyListeners();
+  }
+
+  void addtoHistory()
+  {
+    history.add(searchvalue!);
     notifyListeners();
   }
 }
