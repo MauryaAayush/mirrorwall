@@ -151,7 +151,7 @@ class GoogleScreen extends StatelessWidget {
               onPressed: () {
                 inAppWebViewController.goForward();
               },
-              icon: Icon(Icons.chevron_right),
+              icon: const Icon(Icons.chevron_right),
               iconSize: 32,
             ),
           ],
