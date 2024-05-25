@@ -88,6 +88,13 @@ class GoogleScreen extends StatelessWidget {
                       Provider.of<MainProvider>(context, listen: false)
                           .onchange_progress(progress);
                     },
+
+                    onLoadStart: (controller, url) {
+                      Provider.of<MainProvider>(context,listen: false).setcurrentUrl(url.toString());
+
+                      Provider.of<MainProvider>(context,listen: false).addtoHistory();
+                    },
+
                     onLoadStop: (controller, url) {
                       Provider.of<MainProvider>(context, listen: false)
                           .setcurrentUrl(url.toString());

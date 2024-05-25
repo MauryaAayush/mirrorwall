@@ -34,6 +34,12 @@ class MainProvider extends ChangeNotifier
     notifyListeners();
   }
 
+  void seturlforhistory(String url)
+  {
+    searchvalue = url;
+    notifyListeners();
+  }
+
   void addtoHistory()
   {
     history.add(searchvalue!);
