@@ -6,13 +6,11 @@ import 'package:provider/provider.dart';
 import '../../Providers/All_Providers.dart';
 import '../../Utils/Global_Variables.dart';
 
-
 PullToRefreshController pullToRefreshController = PullToRefreshController(
   onRefresh: () {
     inAppWebViewController.reload();
   },
 );
-
 
 class GoogleScreen extends StatelessWidget {
   const GoogleScreen({super.key});
@@ -31,21 +29,24 @@ class GoogleScreen extends StatelessWidget {
                   prefixIcon: Icon(Icons.error_outline),
                   suffixIcon: IconButton(
                       onPressed: () {
-                        Provider.of<MainProvider>(context, listen: false)
-                            .search(txtsearch.text);
-
-                        inAppWebViewController.loadUrl(
-                            urlRequest: URLRequest(
-                                url: WebUri(
-                                    'https://www.google.com/search?q=   ${Provider.of<MainProvider>(context, listen: false).searchtext}  &sca_esv=2358ec6357e7f4b8&sca_upv=1&sxsrf=ADLYWIIskdPoVtrMe3x9OTJOiDDBhSiqKA%3A1716531975549&ei=BzNQZsqGIcfd2roPxumH2AE&oq=flutter+a&gs_lp=Egxnd3Mtd2l6LXNlcnAiCWZsdXR0ZXIgYSoCCAEyCxAAGIAEGJECGIoFMg4QABiABBiRAhixAxiKBTILEAAYgAQYsQMYgwEyDRAAGIAEGLEDGBQYhwIyCxAAGIAEGJECGIoFMgsQABiABBixAxiDATIOEAAYgAQYkQIYsQMYigUyCxAAGIAEGJECGIoFMgUQABiABDIFEAAYgARIni9QqAlY1hxwAXgBkAEAmAHMAaAB3QKqAQUwLjEuMbgBA8gBAPgBAZgCA6AC6gLCAgcQIxiwAxgnwgIKEAAYsAMY1gQYR8ICBBAjGCfCAgoQIxiABBgnGIoFwgIIEAAYgAQYsQOYAwCIBgGQBgqSBwUxLjEuMaAHyw4&sclient=gws-wiz-serp')));
+                        txtsearch.clear();
                       },
-                      icon: Icon(Icons.find_replace_outlined)),
+                      icon: Icon(Icons.cancel_outlined)),
                   hintText: 'Search or type URL',
                   fillColor: Colors.white,
                   filled: true,
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20)),
                   contentPadding: EdgeInsets.symmetric(vertical: 10)),
+              onFieldSubmitted: (value) {
+                Provider.of<MainProvider>(context, listen: false)
+                    .search(txtsearch.text);
+
+                inAppWebViewController.loadUrl(
+                    urlRequest: URLRequest(
+                        url: WebUri(
+                            'https://www.google.com/search?q=   ${Provider.of<MainProvider>(context, listen: false).searchtext}  &sca_esv=2358ec6357e7f4b8&sca_upv=1&sxsrf=ADLYWIIskdPoVtrMe3x9OTJOiDDBhSiqKA%3A1716531975549&ei=BzNQZsqGIcfd2roPxumH2AE&oq=flutter+a&gs_lp=Egxnd3Mtd2l6LXNlcnAiCWZsdXR0ZXIgYSoCCAEyCxAAGIAEGJECGIoFMg4QABiABBiRAhixAxiKBTILEAAYgAQYsQMYgwEyDRAAGIAEGLEDGBQYhwIyCxAAGIAEGJECGIoFMgsQABiABBixAxiDATIOEAAYgAQYkQIYsQMYigUyCxAAGIAEGJECGIoFMgUQABiABDIFEAAYgARIni9QqAlY1hxwAXgBkAEAmAHMAaAB3QKqAQUwLjEuMbgBA8gBAPgBAZgCA6AC6gLCAgcQIxiwAxgnwgIKEAAYsAMY1gQYR8ICBBAjGCfCAgoQIxiABBgnGIoFwgIIEAAYgAQYsQOYAwCIBgGQBgqSBwUxLjEuMaAHyw4&sclient=gws-wiz-serp')));
+              },
             ),
           ),
           IconButton(
@@ -78,13 +79,11 @@ class GoogleScreen extends StatelessWidget {
                       Provider.of<MainProvider>(context, listen: false)
                           .onchange_progress(progress);
                     },
-
                     onLoadStop: (controller, url) {
-                      Provider.of<MainProvider>(context).setcurrentUrl(url.toString());
+                      Provider.of<MainProvider>(context, listen: false)
+                          .setcurrentUrl(url.toString());
                       pullToRefreshController.endRefreshing();
                     },
-
-
                     pullToRefreshController: pullToRefreshController,
                   ),
                   (Provider.of<MainProvider>(context, listen: true).progress <
@@ -99,7 +98,6 @@ class GoogleScreen extends StatelessWidget {
                           ),
                         )
                       : Container(),
-
                 ],
               );
             } else {
