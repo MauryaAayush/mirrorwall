@@ -70,7 +70,8 @@ class GoogleScreen extends StatelessWidget {
                   },
                 );
               } else if (value == 'History') {
-                Navigator.of(context).push(MaterialPageRoute(
+                Navigator.of(context).push(
+                    MaterialPageRoute(
                   builder: (context) => const HistoryScreen(),
                 ));
               }
@@ -217,7 +218,10 @@ class GoogleScreen extends StatelessWidget {
 
             IconButton(
               disabledColor: Colors.red,
-              onPressed: Provider.of<MainProvider>(context, listen: false)
+              // onPressed: () {
+              //   inAppWebViewController.canGoBack();
+              // },
+              onPressed: Provider.of<MainProvider>(context, listen: true)
                       .isButtonEnabled
                   ? () {
                       if (Provider.of<MainProvider>(context, listen: false)
@@ -229,14 +233,14 @@ class GoogleScreen extends StatelessWidget {
                     }
                   : null,
               icon: const Icon(Icons.chevron_left),
-              iconSize: 32,
+              iconSize: 30
             ),
             IconButton(
               onPressed: () {
                 inAppWebViewController.reload();
               },
               icon: const Icon(Icons.refresh),
-              iconSize: 30,
+              iconSize: 25,
             ),
             IconButton(
               disabledColor: Colors.grey,
@@ -244,7 +248,7 @@ class GoogleScreen extends StatelessWidget {
                 inAppWebViewController.goForward();
               },
               icon: const Icon(Icons.chevron_right),
-              iconSize: 32,
+              iconSize: 30,
             ),
           ],
         ),
