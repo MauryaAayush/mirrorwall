@@ -121,18 +121,18 @@ class MainProvider extends ChangeNotifier {
 
   Future<void> checkIfShouldGoBack() async {
 
-    // print('$currentUrl ----------------------------------');
+    print('$currentUrl ----------------------------------');
 
     if (currentUrl == 'Google' ||
-        currentUrl == 'Yahoo' ||
+        currentUrl == 'Yahoo India' ||
         currentUrl == 'Bing' ||
         currentUrl == 'DuckDuckGo — Privacy, simplified.') {
-      // print('$currentUrl ----------------------------------');
+      print('$currentUrl ----------------------------------');
       isButtonEnabled = false;
       // print(object);
       notifyListeners();
     } else {
-      // print(" else part-------------------------------------------");
+      print(" else part-------------------------------------------");
       isButtonEnabled = await inAppWebViewController.canGoBack();
       // print('$isButtonEnabled');
       notifyListeners();
