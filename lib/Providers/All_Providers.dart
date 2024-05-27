@@ -117,6 +117,7 @@ class MainProvider extends ChangeNotifier {
           urlRequest: URLRequest(
               url: WebUri("https://duckduckgo.com/?q=$newsearchtext&ia=web")));
     }
+    notifyListeners();
   }
 
 
