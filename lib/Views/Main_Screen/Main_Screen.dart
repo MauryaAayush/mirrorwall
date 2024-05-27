@@ -59,16 +59,12 @@ class MainScreen extends StatelessWidget {
                     onLoadStop: (controller, url) async {
                       Provider.of<MainProvider>(context, listen: false)
                           .addtoHistory();
-
                       await Provider.of<MainProvider>(context, listen: false)
                           .setcurrentUrl();
-
                       await Provider.of<MainProvider>(context, listen: false)
                           .checkIfShouldGoBack();
-
                       await Provider.of<MainProvider>(context, listen: false)
                           .canGoForward();
-
                       await pullToRefreshController.endRefreshing();
                     },
                     pullToRefreshController: pullToRefreshController,
