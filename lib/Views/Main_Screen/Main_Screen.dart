@@ -90,16 +90,7 @@ class MainScreen extends StatelessWidget {
               );
             } else {
               return Center(
-                child: Container(
-                  height: 350,
-                  width: 450,
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: AssetImage('assets/gifs/giphy.gif'),
-                    ),
-                  ),
-                ),
+                child: offLine_Code(),
               );
             }
           }),
@@ -108,6 +99,8 @@ class MainScreen extends StatelessWidget {
   }
 
 }
+
+
 
 
 
