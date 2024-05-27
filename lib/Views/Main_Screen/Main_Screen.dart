@@ -6,8 +6,8 @@ import '../../Providers/All_Providers.dart';
 import '../../Utils/Global_Variables.dart';
 import '../Components/BottomNavBar.dart';
 import '../Components/Header_txtField.dart';
+import '../Components/OffLine_Code.dart';
 import '../Components/popUpMenuOfAppbar.dart';
-import '../History Page.dart';
 
 PullToRefreshController pullToRefreshController = PullToRefreshController(
   onRefresh: () {
@@ -54,7 +54,6 @@ class MainScreen extends StatelessWidget {
 
                     // for the add to fav site
                     onLoadStop: (controller, url) async {
-
                       Provider.of<MainProvider>(context, listen: false)
                           .addtoHistory();
 
@@ -64,27 +63,24 @@ class MainScreen extends StatelessWidget {
                       await Provider.of<MainProvider>(context, listen: false)
                           .checkIfShouldGoBack();
 
-                      await Provider.of<MainProvider>(context,listen: false)
-                      .canGoForward();
+                      await Provider.of<MainProvider>(context, listen: false)
+                          .canGoForward();
 
                       await pullToRefreshController.endRefreshing();
                     },
                     pullToRefreshController: pullToRefreshController,
                   ),
-                  (Provider
-                      .of<MainProvider>(context, listen: true)
-                      .progress <
-                      1)
+                  (Provider.of<MainProvider>(context, listen: true).progress <
+                          1)
                       ? Align(
-                    alignment: Alignment.topCenter,
-                    child: LinearProgressIndicator(
-                      color: Colors.blueAccent,
-                      value:
-                      Provider
-                          .of<MainProvider>(context, listen: true)
-                          .progress,
-                    ),
-                  )
+                          alignment: Alignment.topCenter,
+                          child: LinearProgressIndicator(
+                            color: Colors.blueAccent,
+                            value:
+                                Provider.of<MainProvider>(context, listen: true)
+                                    .progress,
+                          ),
+                        )
                       : Container(),
                 ],
               );
@@ -97,12 +93,4 @@ class MainScreen extends StatelessWidget {
       bottomNavigationBar: const BottomNavBar(),
     );
   }
-
 }
-
-
-
-
-
-
-
