@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../Providers/All_Providers.dart';
 import '../../Utils/Global_Variables.dart';
+import '../Components/Header_txtField.dart';
 import '../History Page.dart';
 
 PullToRefreshController pullToRefreshController = PullToRefreshController(
