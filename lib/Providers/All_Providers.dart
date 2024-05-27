@@ -8,15 +8,15 @@ class MainProvider extends ChangeNotifier {
   String searchtext = 'Google';
   String newsearchtext = '';
   String groupValue = 'Google';
+  String? currentUrl;
 
   bool isButtonEnabled = true;
   bool isButtonForward = false;
 
   List searchEngineNames = ['Google', 'Bing', 'Duck Duck Go', 'Yahoo'];
   List<String> bookmarkList = [];
-  String? currentUrl;
   List<String> historylist = [];
-  String? searchvalue;
+
 
 // for progress indicator
   Future<void> onchange_progress(int progress) async {
