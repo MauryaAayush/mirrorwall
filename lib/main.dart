@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:untitled/Providers/All_Providers.dart';
-
 import 'Views/Main_Screen/Main_Screen.dart';
 
 void main() {
