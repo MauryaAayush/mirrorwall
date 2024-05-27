@@ -2,6 +2,8 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../Providers/All_Providers.dart';
 import '../../Utils/Global_Variables.dart';
@@ -52,22 +54,90 @@ class GoogleScreen extends StatelessWidget {
             onSelected: (value) {
               if (value == 'Feedback') {
                 showModalBottomSheet(
+                  elevation: 10,
                   context: context,
+                  backgroundColor: Colors.transparent,
                   builder: (BuildContext context) {
                     return Consumer<MainProvider>(
                       builder: (context, mainProvider, child) {
-                        return ListView.builder(
-                          itemCount: mainProvider.bookmarkList.length,
-                          itemBuilder: (context, index) {
-                            return ListTile(
-                              title: Text(mainProvider.bookmarkList[index]),
-                            );
-                          },
+                        return Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(20),
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black26,
+                                blurRadius: 10,
+                                spreadRadius: 5,
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
+                                child: Text(
+                                  'Bookmarks',
+                                  style: TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black87,
+                                  ),
+                                ),
+                              ),
+                              Divider(
+                                color: Colors.grey[300],
+                                thickness: 1,
+                                height: 1,
+                              ),
+                              Expanded(
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: mainProvider.bookmarkList.length,
+                                  itemBuilder: (context, index) {
+                                    return Container(
+                                      margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(10),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black12,
+                                            blurRadius: 5,
+                                            spreadRadius: 1,
+                                          ),
+                                        ],
+                                      ),
+                                      child: ListTile(
+                                        title: Text(
+                                          mainProvider.bookmarkList[index],
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            color: Colors.black87,
+                                          ),
+                                        ),
+                                        trailing: Icon(
+                                          Icons.bookmark,
+                                          color: Colors.blue,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
                         );
                       },
                     );
                   },
                 );
+
+
+
               } else if (value == 'History') {
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => const HistoryScreen(),
@@ -211,7 +281,6 @@ class GoogleScreen extends StatelessWidget {
                   height: 350,
                   width: 450,
                   decoration: const BoxDecoration(
-                    color: Colors.blue,
                     image: DecorationImage(
                       fit: BoxFit.cover,
                       image: AssetImage('assets/gifs/giphy.gif'),
