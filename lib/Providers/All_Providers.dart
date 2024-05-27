@@ -136,7 +136,6 @@ class MainProvider extends ChangeNotifier {
     }
   }
 
-
   void updateSearchedText(String text) {
     newsearchtext = text;
     notifyListeners();

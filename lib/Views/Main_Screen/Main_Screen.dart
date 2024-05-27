@@ -200,33 +200,22 @@ class MainScreen extends StatelessWidget {
                           .onchange_progress(progress);
                     },
 
-                    // for the History add and show
                     onLoadStart: (controller, url) {
-                      // Provider.of<MainProvider>(context, listen: false)
-                      //     .setcurrentUrl(url.toString());
 
-                      Provider.of<MainProvider>(context, listen: false)
-                          .addtoHistory();
+
                     },
 
                     // for the add to fav site
                     onLoadStop: (controller, url) async {
-                      // Provider.of<MainProvider>(context, listen: false)
-                      //     .setcurrentUrl(url.toString());
-                      //
-                      // Provider.of<MainProvider>(context, listen: false)
-                      //     .addtoHistory();
 
+                      await Provider.of<MainProvider>(context, listen: false)
+                          .addtoHistory();
 
                       await Provider.of<MainProvider>(context, listen: false)
                           .setcurrentUrl();
 
-                      // await Provider.of<MainProvider>(context, listen: false)
-                      //     .canGoBack();
-
                       await Provider.of<MainProvider>(context, listen: false)
                           .checkIfShouldGoBack();
-
 
                       await Provider.of<MainProvider>(context,listen: false)
                       .canGoForward();
