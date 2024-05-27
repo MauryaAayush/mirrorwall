@@ -116,8 +116,6 @@ class MainProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
-
   Future<void> checkIfShouldGoBack() async {
 
     // print('$currentUrl ----------------------------------');
@@ -137,6 +135,7 @@ class MainProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
+
 
   void updateSearchedText(String text) {
     newsearchtext = text;
