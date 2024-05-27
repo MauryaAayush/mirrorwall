@@ -24,7 +24,6 @@ class MainScreen extends StatelessWidget {
       backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
         actions: const [
-
           // here is the text field of header
           SizedBox(
             height: 40,
