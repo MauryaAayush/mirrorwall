@@ -4,15 +4,15 @@ import 'package:untitled/Utils/Global_Variables.dart';
 
 class MainProvider extends ChangeNotifier {
   double progress = 0;
+
   String searchtext = 'Google';
   String newsearchtext = '';
-
   String groupValue = 'Google';
-  List searchEngineNames = ['Google', 'Bing', 'Duck Duck Go', 'Yahoo'];
-  String? searchedUrl;
+
   bool isButtonEnabled = true;
   bool isButtonForward = false;
 
+  List searchEngineNames = ['Google', 'Bing', 'Duck Duck Go', 'Yahoo'];
   List<String> bookmarkList = [];
   String? currentUrl;
   List<String> historylist = [];
