@@ -26,29 +26,7 @@ class MainScreen extends StatelessWidget {
           SizedBox(
             height: 40,
             width: 350,
-            child: TextFormField(
-              controller: txtsearch,
-              decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.link_sharp),
-                  suffixIcon: IconButton(
-                      onPressed: () {
-                        txtsearch.clear();
-                      },
-                      icon: Icon(Icons.cancel_outlined)),
-                  hintText: 'Search or type URL',
-                  fillColor: Colors.white,
-                  filled: true,
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20)),
-                  contentPadding: EdgeInsets.symmetric(vertical: 10)),
-              onFieldSubmitted: (value) {
-                Provider.of<MainProvider>(context, listen: false)
-                    .updateSearchedText(value);
-
-                Provider.of<MainProvider>(context, listen: false)
-                    .searchEngines();
-              },
-            ),
+            child: Header_TextFormField(),
           ),
           PopupMenuButton(
             onSelected: (value) {
@@ -357,3 +335,4 @@ class MainScreen extends StatelessWidget {
   }
 
 }
+
