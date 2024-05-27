@@ -84,7 +84,7 @@ class MainScreen extends StatelessWidget {
                 ],
               );
             } else {
-              return Center(
+              return const Center(
                 child: offLine_Code(),
               );
             }
