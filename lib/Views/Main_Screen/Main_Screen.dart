@@ -15,8 +15,8 @@ PullToRefreshController pullToRefreshController = PullToRefreshController(
   },
 );
 
-class GoogleScreen extends StatelessWidget {
-  const GoogleScreen({super.key});
+class MainScreen extends StatelessWidget {
+  const MainScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

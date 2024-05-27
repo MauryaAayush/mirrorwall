@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:untitled/Providers/All_Providers.dart';
 
-import 'Views/Google_Screen/Google_Screen.dart';
+import 'Views/Main_Screen/Main_Screen.dart';
 
 void main() {
   runApp(
@@ -24,7 +24,7 @@ class MirrorWall extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: GoogleScreen(),
+      home: MainScreen(),
     );
   }
 }
