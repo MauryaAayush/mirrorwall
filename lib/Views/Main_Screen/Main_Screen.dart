@@ -30,7 +30,6 @@ class MainScreen extends StatelessWidget {
             width: 350,
             child: Header_TextFormField(),
           ),
-
           // this is pop up menu of trailing
           PopUpofAppBar(),
         ],
