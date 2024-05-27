@@ -48,7 +48,6 @@ class MainProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
   void search(String searchtext) {
     this.searchtext = searchtext;
     notifyListeners();
