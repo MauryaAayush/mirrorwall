@@ -40,12 +40,11 @@ class GoogleScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20)),
                   contentPadding: EdgeInsets.symmetric(vertical: 10)),
               onFieldSubmitted: (value) {
-
                 Provider.of<MainProvider>(context, listen: false)
                     .updateSearchedText(value);
 
-              Provider.of<MainProvider>(context,listen: false).searchEngines();
-
+                Provider.of<MainProvider>(context, listen: false)
+                    .searchEngines();
               },
             ),
           ),
@@ -70,12 +69,10 @@ class GoogleScreen extends StatelessWidget {
                   },
                 );
               } else if (value == 'History') {
-                Navigator.of(context).push(
-                    MaterialPageRoute(
+                Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => const HistoryScreen(),
                 ));
-              }
-              else if (value == 'Engine') {
+              } else if (value == 'Engine') {
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
@@ -90,18 +87,33 @@ class GoogleScreen extends StatelessWidget {
                               child: ListView.builder(
                                 itemCount: 4,
                                 shrinkWrap: true,
-                                itemBuilder: (context, index) => RadioListTile(
-                                  title: Text(Provider.of<MainProvider>(context, listen: true).searchEngineNames[index]),
-                                  value: Provider.of<MainProvider>(context, listen: true).searchEngineNames[index],
-                                  groupValue: Provider.of<MainProvider>(context, listen: true).groupValue,
-                                  onChanged: (value) {
-                                    Provider.of<MainProvider>(context, listen: false).updateSearchEngineGroupValue(value!);
-                                    Navigator.pop(context);
-                                    Provider.of<MainProvider>(context, listen: false).updateSearchEngine(value!);
+                                itemBuilder: (context, index) =>
+                                    RadioListTile(
+                                      title: Text(Provider
+                                          .of<MainProvider>(context,
+                                          listen: true)
+                                          .searchEngineNames[index]),
+                                      value: Provider
+                                          .of<MainProvider>(context,
+                                          listen: true)
+                                          .searchEngineNames[index],
+                                      groupValue: Provider
+                                          .of<MainProvider>(context,
+                                          listen: true)
+                                          .groupValue,
+                                      onChanged: (value) {
+                                        Provider.of<MainProvider>(context,
+                                            listen: false)
+                                            .updateSearchEngineGroupValue(
+                                            value!);
+                                        Navigator.pop(context);
+                                        Provider.of<MainProvider>(context,
+                                            listen: false)
+                                            .updateSearchEngine(value!);
 
-                                    print(value);
-                                  },
-                                ),
+                                        print(value);
+                                      },
+                                    ),
                               ),
                             ),
                           ],
@@ -111,9 +123,9 @@ class GoogleScreen extends StatelessWidget {
                   },
                 );
               }
-
             },
-            itemBuilder: (context) => <PopupMenuEntry>[
+            itemBuilder: (context) =>
+            <PopupMenuEntry>[
               PopupMenuItem(value: 'Feedback', child: Text('Feedback')),
               PopupMenuItem(value: 'History', child: Text('History')),
               PopupMenuItem(value: 'Engine', child: Text('Search Engine')),
@@ -151,30 +163,45 @@ class GoogleScreen extends StatelessWidget {
                     },
 
                     // for the add to fav site
-                    onLoadStop: (controller, url) {
+                    onLoadStop: (controller, url) async {
                       // Provider.of<MainProvider>(context, listen: false)
                       //     .setcurrentUrl(url.toString());
                       //
                       // Provider.of<MainProvider>(context, listen: false)
                       //     .addtoHistory();
 
-                      Provider.of<MainProvider>(context, listen: false)
+
+                      await Provider.of<MainProvider>(context, listen: false)
                           .setcurrentUrl();
-                      pullToRefreshController.endRefreshing();
+
+                      // await Provider.of<MainProvider>(context, listen: false)
+                      //     .canGoBack();
+
+                      await Provider.of<MainProvider>(context, listen: false)
+                          .checkIfShouldGoBack();
+
+
+                      await Provider.of<MainProvider>(context,listen: false)
+                      .canGoForward();
+
+                      await pullToRefreshController.endRefreshing();
                     },
                     pullToRefreshController: pullToRefreshController,
                   ),
-                  (Provider.of<MainProvider>(context, listen: true).progress <
-                          1)
+                  (Provider
+                      .of<MainProvider>(context, listen: true)
+                      .progress <
+                      1)
                       ? Align(
-                          alignment: Alignment.topCenter,
-                          child: LinearProgressIndicator(
-                            color: Colors.blueAccent,
-                            value:
-                                Provider.of<MainProvider>(context, listen: true)
-                                    .progress,
-                          ),
-                        )
+                    alignment: Alignment.topCenter,
+                    child: LinearProgressIndicator(
+                      color: Colors.blueAccent,
+                      value:
+                      Provider
+                          .of<MainProvider>(context, listen: true)
+                          .progress,
+                    ),
+                  )
                       : Container(),
                 ],
               );
@@ -203,8 +230,8 @@ class GoogleScreen extends StatelessWidget {
                 onPressed: () {
                   inAppWebViewController.loadUrl(
                       urlRequest: URLRequest(
-                    url: WebUri('https://www.google.com/'),
-                  ));
+                        url: WebUri('https://www.google.com/'),
+                      ));
                 },
                 icon: const Icon(Icons.home)),
             IconButton(
@@ -217,24 +244,19 @@ class GoogleScreen extends StatelessWidget {
             // here is logic of back button
 
             IconButton(
-              disabledColor: Colors.red,
-              // onPressed: () {
-              //   inAppWebViewController.canGoBack();
-              // },
-              onPressed: Provider.of<MainProvider>(context, listen: true)
-                      .isButtonEnabled
-                  ? () {
-                      if (Provider.of<MainProvider>(context, listen: false)
-                          .isButtonEnabled) {
-                        inAppWebViewController.goBack();
-                      } else {
-                        return;
-                      }
-                    }
-                  : null,
-              icon: const Icon(Icons.chevron_left),
-              iconSize: 30
-            ),
+                onPressed: Provider
+                    .of<MainProvider>(context, listen: true)
+                    .isButtonEnabled
+                    ? () {
+                   (Provider
+                      .of<MainProvider>(context, listen: false)
+                      .goBack());
+
+
+                }
+                    : null,
+                icon: const Icon(Icons.chevron_left),
+                iconSize: 30),
             IconButton(
               onPressed: () {
                 inAppWebViewController.reload();
@@ -243,10 +265,19 @@ class GoogleScreen extends StatelessWidget {
               iconSize: 25,
             ),
             IconButton(
-              disabledColor: Colors.grey,
-              onPressed: () {
-                inAppWebViewController.goForward();
-              },
+
+              onPressed: Provider
+                  .of<MainProvider>(context, listen: true)
+                  .isButtonForward
+                  ? () {
+                (Provider
+                    .of<MainProvider>(context, listen: false)
+                    .goForward());
+
+
+              }
+                  : null,
+
               icon: const Icon(Icons.chevron_right),
               iconSize: 30,
             ),
@@ -255,4 +286,5 @@ class GoogleScreen extends StatelessWidget {
       ),
     );
   }
+
 }

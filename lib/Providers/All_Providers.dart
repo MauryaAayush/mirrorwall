@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:untitled/Utils/Global_Variables.dart';
@@ -12,7 +13,8 @@ class MainProvider extends ChangeNotifier {
   String groupValue = 'Google';
   List searchEngineNames = ['Google', 'Bing', 'Duck Duck Go', 'Yahoo'];
   String? searchedUrl;
-  bool isButtonEnabled = false;
+  bool isButtonEnabled = true;
+  bool isButtonForward = false;
 
   List<String> bookmarkList = [];
   String? currentUrl;
@@ -25,17 +27,30 @@ class MainProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
-
-  Future<bool> timePass() async {
-    if (isButtonEnabled) {
-      await inAppWebViewController.goBack();
-      return true;
-    }
-
+  Future<void> goBack() async {
+    await inAppWebViewController.goBack();
     notifyListeners();
-    return false;
   }
+
+  Future<void> canGoBack()
+  async {
+    // checkIfShouldGoBack();
+    isButtonEnabled = await inAppWebViewController.canGoBack();
+    notifyListeners();
+  }
+
+  Future<void> goForward()
+  async {
+    await inAppWebViewController.goForward();
+    notifyListeners();
+  }
+
+  Future<void> canGoForward()
+  async {
+    isButtonForward = await inAppWebViewController.canGoForward();
+    notifyListeners();
+  }
+
 
   void search(String searchtext) {
     this.searchtext = searchtext;
@@ -45,8 +60,6 @@ class MainProvider extends ChangeNotifier {
   Future<void> setcurrentUrl() async {
     // WebUri? webUri = await inAppWebViewController.getUrl();
     currentUrl = await inAppWebViewController.getTitle() as String;
-
-    checkIfShouldGoBack();
     notifyListeners();
   }
 
@@ -82,7 +95,7 @@ class MainProvider extends ChangeNotifier {
     groupValue = value;
     notifyListeners();
   }
-
+   
   void searchEngines() {
     if (searchtext == 'Google') {
       inAppWebViewController.loadUrl(
@@ -106,16 +119,24 @@ class MainProvider extends ChangeNotifier {
     }
   }
 
-  void checkIfShouldGoBack() {
-    if (currentUrl == 'https://www.google.com/' ||
-        currentUrl == 'https://in.search.yahoo.com/' ||
-        currentUrl == 'https://www.bing.com/' ||
-        currentUrl == 'https://duckduckgo.com/') {
-      // print(searchedUrl);
+
+
+  Future<void> checkIfShouldGoBack() async {
+
+    print('$currentUrl ----------------------------------');
+
+    if (currentUrl == 'Google' ||
+        currentUrl == 'Yahoo' ||
+        currentUrl == 'Bing' ||
+        currentUrl == 'DuckDuckGo — Privacy, simplified.') {
+      print('$currentUrl ----------------------------------');
       isButtonEnabled = false;
+      // print(object);
       notifyListeners();
     } else {
-      isButtonEnabled = true;
+      print(" else part-------------------------------------------");
+      isButtonEnabled = await inAppWebViewController.canGoBack();
+      print('$isButtonEnabled');
       notifyListeners();
     }
   }
