@@ -11,7 +11,7 @@ class HistoryScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('saved Pages'),
+        title: Text('Search History'),
       ),
       body: Center(
         child: Padding(
@@ -20,9 +20,14 @@ class HistoryScreen extends StatelessWidget {
               itemCount: Provider.of<MainProvider>(context).historylist.length,
               itemBuilder: (context, index) {
                 return ListTile(
+                  leading: Icon(Icons.link),
+                  trailing: IconButton(onPressed: () {
+                    
+                  }, icon: Icon(Icons.more_vert)),
                   title: Text(
                       Provider.of<MainProvider>(context).historylist[index]),
                 );
+                
               },
             )),
       ),
